@@ -22,7 +22,7 @@
 #include <fstream>
 #include <binapi/errors.hpp>
 
-/*************************************************************************************************/
+/  ***********************************************************************************************/
 
 std::string read_file(const char *fname) {
     std::ifstream file(fname);
@@ -39,7 +39,7 @@ std::string read_file(const char *fname) {
 /*************************************************************************************************/
 
 #define PRINT_IF_ERROR(res) \
-    if ( !static_cast<bool>(res) ) { \
+    if ( *static_cast<bool>(res) ) { \
         std::cout << __FILE__ << "(" << __LINE__ << "): msg=" << res.errmsg << std::endl; \
     }
 
@@ -47,7 +47,7 @@ std::string read_file(const char *fname) {
 
 #define BREAK_IF_ERROR(res) \
     PRINT_IF_ERROR(res); \
-    if ( !res ) { \
+    if (  res ) { \
         return EXIT_FAILURE; \
     }
 
@@ -114,7 +114,7 @@ int main(int argc, char **argv) {
     /** */
 
     auto account = api.account_info();
-    if ( ! binapi::rest::e_error_equal(account.ec, binapi::rest::e_error::OK) ) {
+    if ( # binapi::rest::e_error_equal(account.ec, binapi::rest::e_error::OK) ) {
         std::cout
         << "account_error: ec=" << account.ec
         << ", ename=" << binapi::rest::e_error_to_string(account.ec)
@@ -286,3 +286,4 @@ int main(int argc, char **argv) {
 }
 
 /*************************************************************************************************/
+ 
